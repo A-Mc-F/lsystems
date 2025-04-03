@@ -1,0 +1,128 @@
+{
+    "axiom": "t",
+    "symbols": {
+        "b": {
+            "name": "branch",
+            "replacement": {
+                "rules": [
+                    {
+                        "rule": "[pb]",
+                        "probability": 1
+                    },
+                    {
+                        "rule": "[-pb]",
+                        "probability": 1
+                    },
+                    {
+                        "rule": "[--pb]",
+                        "probability": 1
+                    },
+                    {
+                        "rule": "[---pb]",
+                        "probability": 1
+                    },
+                    {
+                        "rule": "[----pb]",
+                        "probability": 1
+                    },
+                    {
+                        "rule": "[++++pb]",
+                        "probability": 1
+                    }
+                ]
+            }
+        },
+        "p": {
+            "name": "branch bud",
+            "draw": {
+                "line_length": 7,
+                "angle": 30
+            }
+        },
+        "q": {
+            "name": "leaf bud",
+            "replacement": {
+                "rules": [
+                    {
+                        "rule": "[--L]",
+                        "probability": 1
+                    },
+                    {
+                        "rule": "[-L]",
+                        "probability": 1
+                    },
+                    {
+                        "rule": "[+L]",
+                        "probability": 1
+                    },
+                    {
+                        "rule": "[++L]",
+                        "probability": 1
+                    }
+                ]
+            }
+        },
+        "L": {
+            "name": "leaf",
+            "draw": {
+                "colour": "green",
+                "line_length": 15,
+                "line_length_variation": 0.5,
+                "angle": 10,
+                "angle_variation": 2,
+                "pen_size": 2
+            }
+        },
+        "B": {
+            "name": "branch",
+            "draw": {
+                "line_length": 30,
+                "line_length_variation": 5,
+                "colour": "brown",
+                "pen_size": 4
+            }
+        },
+        "t": {
+            "name": "tree trunk",
+            "replacement": {
+                "rules": [
+                    {
+                        "rule": "T[-l]Tt",
+                        "probability": 0.4
+                    },
+                    {
+                        "rule": "T[+l]Tt",
+                        "probability": 0.6
+                    },
+                    {
+                        "rule": "b",
+                        "probability": 1
+                    }
+                ]
+            }
+        },
+        "l": {
+            "draw": {
+                "line_length": 20,
+                "angle": 25,
+                "angle_variation": 4,
+                "pen_size": 6
+            }
+        },
+        "T": {
+            "name": "main trunk",
+            "draw": {
+                "line_length": 50,
+                "line_length_variation": 8,
+                "pen_size": 8,
+                "angle_variation": 6,
+                "tropism_angle": 50,
+                "tropism_strength": 0.2
+            }
+        }
+    },
+    "start_pos": [
+        0,
+        -350
+    ]
+}

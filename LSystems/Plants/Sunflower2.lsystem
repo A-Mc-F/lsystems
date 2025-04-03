@@ -1,0 +1,129 @@
+{
+    "axiom": "s",
+    "symbols": {
+        "c": {
+            "name": "flower center bud",
+            "rules": [
+                {
+                    "rule": "[pq][-pq][--pq][---pq][----pq][-----pq][+pq][++pq][+++pq][++++pq][+++++pq][++++++pq]C",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "p": {
+            "name": "petal bud",
+            "rules": [
+                {
+                    "rule": "p",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "angle": 30,
+                "line_length": 5
+            }
+        },
+        "q": {
+            "name": "petal bud 2",
+            "rules": [
+                {
+                    "rule": "[--P][-P][+P][++P]",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "P": {
+            "name": "petal",
+            "rules": [
+                {
+                    "rule": "P",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "colour": "blue",
+                "line_length": 30,
+                "line_length_variation": 0.5,
+                "angle": 15,
+                "angle_variation": 1,
+                "pen_size": 5
+            }
+        },
+        "C": {
+            "name": "flower Centre",
+            "rules": [
+                {
+                    "rule": "C",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "line_length": 0,
+                "colour": "red",
+                "pen_size": 50
+            }
+        },
+        "s": {
+            "name": "seed",
+            "rules": [
+                {
+                    "rule": "S[-l]Ss",
+                    "probability": 0.4
+                },
+                {
+                    "rule": "S[+l]Ss",
+                    "probability": 0.66
+                },
+                {
+                    "rule": "c",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "l": {
+            "name": "leaf",
+            "rules": [
+                {
+                    "rule": "l",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "line_length": 25,
+                "angle": 30,
+                "angle_variation": 5,
+                "pen_size": 10,
+                "colour": "purple"
+            }
+        },
+        "S": {
+            "name": "stem",
+            "rules": [
+                {
+                    "rule": "S",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "line_length": 25,
+                "line_length_variation": 10,
+                "pen_size": 7,
+                "angle_variation": 3,
+                "tropism_angle": 90,
+                "tropism_strength": 0.1
+            }
+        }
+    },
+    "line_length": 10,
+    "line_length_variation": 0.1,
+    "angle": 10,
+    "angle_variation": 0.01,
+    "tropism_angle": 80,
+    "tropism_strength": 0.01,
+    "pen_size": 2,
+    "start_pos": [
+        0,
+        -300
+    ],
+    "sub_chance": 1.0
+}

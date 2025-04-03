@@ -1,0 +1,173 @@
+{
+    "axiom": "[--l][-SSSSb][-l][SSSSb][+r][+SSSSb][++r]",
+    "symbols": {
+        "S": {
+            "name": "stem",
+            "rules": [
+                {
+                    "rule": "S",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "line_length": 30,
+                "line_length_variation": 5,
+                "angle": 10,
+                "angle_variation": 2,
+                "tropism_angle": 80,
+                "tropism_strength": 0.1,
+                "pen_size": 5,
+                "colour": "green3"
+            }
+        },
+        "b": {
+            "name": "stem bud",
+            "rules": [
+                {
+                    "rule": "Sb",
+                    "probability": 0.5
+                },
+                {
+                    "rule": "s",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "line_length": 2,
+                "line_length_variation": 1,
+                "angle_variation": 2,
+                "tropism_angle": 80,
+                "tropism_strength": 0.1,
+                "pen_size": 5,
+                "colour": "green2"
+            }
+        },
+        "s": {
+            "name": "flower stork",
+            "rules": [
+                {
+                    "rule": "Y[+fF]s",
+                    "probability": 0.4
+                },
+                {
+                    "rule": "Y[-fF]s",
+                    "probability": 0.4
+                },
+                {
+                    "rule": "",
+                    "probability": 0.2
+                }
+            ],
+            "draw": {
+                "pen_size": 3,
+                "tropism_angle": 270,
+                "tropism_strength": 0.1
+            }
+        },
+        "Y": {
+            "name": "grown flower stork",
+            "rules": [
+                {
+                    "rule": "Y",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "colour": "dark slate gray",
+                "pen_size": 5,
+                "tropism_angle": 270,
+                "tropism_strength": 0.1
+            }
+        },
+        "l": {
+            "name": "LHleaf",
+            "rules": [
+                {
+                    "rule": "Ll",
+                    "probability": 0.6
+                },
+                {
+                    "rule": "-Ll",
+                    "probability": 0.8
+                },
+                {
+                    "rule": "L",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "line_length": 15,
+                "pen_size": 5
+            }
+        },
+        "r": {
+            "name": "RHleaf",
+            "rules": [
+                {
+                    "rule": "Rr",
+                    "probability": 0.6
+                },
+                {
+                    "rule": "+Rr",
+                    "probability": 0.8
+                },
+                {
+                    "rule": "",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "line_length": 15,
+                "pen_size": 5
+            }
+        },
+        "f": {
+            "name": "flower stem",
+            "rules": [
+                {
+                    "rule": "f",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "line_length": 10,
+                "line_length_variation": 1,
+                "angle": 120,
+                "angle_variation": 5,
+                "tropism_angle": 270,
+                "tropism_strength": 0.1,
+                "pen_size": 3,
+                "colour": "purple4"
+            }
+        },
+        "F": {
+            "name": "flower",
+            "rules": [
+                {
+                    "rule": "F",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "line_length": 8,
+                "line_length_variation": 1,
+                "pen_size": 10,
+                "colour": "SlateBlue2",
+                "tropism_angle": 270,
+                "tropism_strength": 0.8
+            }
+        }
+    },
+    "line_length": 10,
+    "line_length_variation": 0.1,
+    "angle": 10,
+    "angle_variation": 0.01,
+    "tropism_angle": 80,
+    "tropism_strength": 0.01,
+    "pen_size": 27,
+    "start_pos": [
+        0,
+        -350
+    ],
+    "sub_chance": 1.0
+}

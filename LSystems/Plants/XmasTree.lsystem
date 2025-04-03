@@ -1,0 +1,127 @@
+{
+    "axiom": "A",
+    "symbols": {
+        "A": {
+            "name": "trunk shoot",
+            "rules": [
+                {
+                    "rule": "FFF[-B][+C]A",
+                    "probability": 1
+                }
+            ],
+            "draw": {
+                "colour": "#FFD700",
+                "pen_size": 10
+            }
+        },
+        "F": {
+            "name": "trunk",
+            "draw": {
+                "pen_size": 7,
+                "line_length": 3
+            }
+        },
+        "B": {
+            "name": "LH Branch Shoot",
+            "rules": [
+                {
+                    "rule": "DB",
+                    "probability": 1
+                },
+                {
+                    "rule": "DbB",
+                    "probability": 0.05
+                }
+            ]
+        },
+        "C": {
+            "name": "RH Branch Shoot",
+            "rules": [
+                {
+                    "rule": "EC",
+                    "probability": 1
+                },
+                {
+                    "rule": "EbC",
+                    "probability": 0.05
+                }
+            ]
+        },
+        "D": {
+            "name": "LH Branch",
+            "draw": {
+                "tropism_angle": 180,
+                "tropism_strength": 0.05,
+                "line_length": 3
+            }
+        },
+        "E": {
+            "name": "RH Branch",
+            "draw": {
+                "tropism_angle": 0,
+                "tropism_strength": 0.05,
+                "line_length": 3
+            }
+        },
+        "b": {
+            "name": "Bauble",
+            "rules": [
+                {
+                    "rule": "w",
+                    "probability": 0.3
+                },
+                {
+                    "rule": "r",
+                    "probability": 0.3
+                },
+                {
+                    "rule": "l",
+                    "probability": 0.3
+                },
+                {
+                    "rule": "",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "w": {
+            "name": "white bauble",
+            "draw": {
+                "colour": "#FFFFFF",
+                "pen_size": 7,
+                "line_length": 1,
+                "tropism_strength": 0
+            }
+        },
+        "r": {
+            "name": "red bauble",
+            "draw": {
+                "colour": "#FF0000",
+                "pen_size": 7,
+                "line_length": 1,
+                "tropism_strength": 0
+            }
+        },
+        "l": {
+            "name": "blue bauble",
+            "draw": {
+                "colour": "#0000FF",
+                "pen_size": 7,
+                "line_length": 1,
+                "tropism_strength": 0
+            }
+        }
+    },
+    "line_length": 2,
+    "line_length_variation": 0.1,
+    "angle": 40,
+    "angle_variation": 1.0,
+    "tropism_angle": 91,
+    "tropism_strength": 0.01,
+    "pen_size": 2,
+    "start_pos": [
+        0,
+        -380
+    ],
+    "sub_chance": 1.0
+}

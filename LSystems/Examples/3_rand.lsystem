@@ -1,0 +1,43 @@
+{
+    "axiom": "Y",
+    "symbols": {
+        "X": {
+            "name": "X",
+            "rules": [
+                {
+                    "rule": "XX",
+                    "probability": 0.9
+                },
+                {
+                    "rule": "X",
+                    "probability": 0.1
+                }
+            ]
+        },
+        "Y": {
+            "name": "Y",
+            "rules": [
+                {
+                    "rule": "X[-Y][+Y]",
+                    "probability": 0.9
+                },
+                {
+                    "rule": "[-Y][+Y]",
+                    "probability": 0.1
+                }
+            ]
+        }
+    },
+    "line_length": 20,
+    "line_length_variation": 3,
+    "angle": 30,
+    "angle_variation": 2,
+    "tropism_angle": 90,
+    "tropism_strength": 0,
+    "pen_size": 5,
+    "start_pos": [
+        0,
+        -300
+    ],
+    "sub_chance": 1.0
+}

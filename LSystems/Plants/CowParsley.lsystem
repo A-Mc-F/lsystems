@@ -1,0 +1,88 @@
+{
+    "axiom": "F",
+    "symbols": {
+        "F": {
+            "name": "F",
+            "rules": [
+                {
+                    "rule": "XY[++G][--G][G]",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "colour": "white",
+                "pen_size": 7
+            }
+        },
+        "G": {
+            "name": "G",
+            "rules": [
+                {
+                    "rule": "XX[++G][--G][G]",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "colour": "white",
+                "pen_size": 7
+            }
+        },
+        "X": {
+            "name": "X",
+            "rules": [
+                {
+                    "rule": "XX",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "Y": {
+            "name": "Y",
+            "rules": [
+                {
+                    "rule": "YZ",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "Z": {
+            "name": "Z",
+            "rules": [
+                {
+                    "rule": "[++++L]X[----L]X",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "L": {
+            "name": "L",
+            "rules": [
+                {
+                    "rule": "MM[+++L][---L]L",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "M": {
+            "name": "M",
+            "rules": [
+                {
+                    "rule": "MMM",
+                    "probability": 1.0
+                }
+            ]
+        }
+    },
+    "line_length": 2,
+    "line_length_variation": 2,
+    "angle": 20,
+    "angle_variation": 0.07,
+    "tropism_angle": 70,
+    "tropism_strength": 0.01,
+    "pen_size": 2,
+    "start_pos": [
+        -100,
+        -380
+    ],
+    "sub_chance": 1.0
+}

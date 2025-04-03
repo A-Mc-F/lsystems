@@ -1,0 +1,132 @@
+{
+    "axiom": "A",
+    "symbols": {
+        "A": {
+            "name": "trunk shoot",
+            "replacement": {
+                "rule": "FFF[-B][+C]A"
+            },
+            "draw": {
+                "colour": "gold",
+                "pen_size": 10,
+                "line_length": 10
+            }
+        },
+        "F": {
+            "name": "trunk",
+            "draw": {
+                "pen_size": 8,
+                "line_length": 15,
+                "line_length_variation": 3,
+                "angle": 10,
+                "angle_variation": 5
+            }
+        },
+        "B": {
+            "name": "left branch shoot",
+            "replacement": {
+                "rule": "DB",
+                "rules": [
+                    [
+                        "DbB",
+                        0.1
+                    ]
+                ]
+            },
+            "draw": {
+                "colour": "brown",
+                "pen_size": 6,
+                "line_length": 25,
+                "line_length_variation": 5,
+                "angle": 20,
+                "angle_variation": 5
+            }
+        },
+        "C": {
+            "name": "right branch shoot",
+            "replacement": {
+                "rule": "EC",
+                "rules": [
+                    [
+                        "EbC",
+                        0.1
+                    ]
+                ]
+            },
+            "draw": {
+                "colour": "brown",
+                "pen_size": 6,
+                "line_length": 25,
+                "line_length_variation": 5,
+                "angle": -20,
+                "angle_variation": 5
+            }
+        },
+        "D": {
+            "name": "left branch",
+            "draw": {
+                "line_length": 25,
+                "angle": 30,
+                "angle_variation": 5,
+                "tropism_angle": 180,
+                "tropism_strength": 0.1,
+                "pen_size": 5
+            }
+        },
+        "E": {
+            "name": "right branch",
+            "draw": {
+                "line_length": 25,
+                "angle": -30,
+                "angle_variation": 5,
+                "tropism_angle": 0,
+                "tropism_strength": 0.1,
+                "pen_size": 5
+            }
+        },
+        "L": {
+            "name": "leaf clump",
+            "replacement": {
+                "rule": "H[---G][+++G]L"
+            },
+            "draw": {
+                "colour": "green",
+                "pen_size": 3,
+                "line_length": 10,
+                "angle": 0
+            }
+        },
+        "G": {
+            "name": "leaf",
+            "replacement": {
+                "rule": "H[---G][+++G]"
+            },
+            "draw": {
+                "colour": "green",
+                "pen_size": 2,
+                "line_length": 5,
+                "angle": 0
+            }
+        },
+        "H": {
+            "name": "leaf base",
+            "draw": {
+                "colour": "green",
+                "pen_size": 1,
+                "line_length": 3
+            }
+        }
+    },
+    "line_length": 2,
+    "line_length_variation": 0.1,
+    "angle": 25,
+    "angle_variation": 1.0,
+    "tropism_angle": 90,
+    "tropism_strength": 0.05,
+    "pen_size": 3,
+    "start_pos": [
+        0,
+        -300
+    ],
+    "sub_chance": 1.0
+}

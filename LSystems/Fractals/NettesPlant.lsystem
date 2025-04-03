@@ -1,0 +1,33 @@
+{
+    "axiom": "A",
+    "symbols": {
+        "A": {
+            "rules": [
+                {
+                    "rule": "+A-B+A",
+                    "probability": 1
+                }
+            ]
+        },
+        "B": {
+            "rules": [
+                {
+                    "rule": "-B+A-B",
+                    "probability": 1
+                }
+            ]
+        }
+    },
+    "line_length": 5,
+    "line_length_variation": 0.0,
+    "angle": 90,
+    "angle_variation": 0.0,
+    "tropism_angle": 0,
+    "tropism_strength": 0.0,
+    "pen_size": 3,
+    "start_pos": [
+        0,
+        0
+    ],
+    "sub_chance": 1.0
+}

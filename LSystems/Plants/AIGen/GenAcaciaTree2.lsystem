@@ -1,0 +1,99 @@
+{
+    "axiom": "A",
+    "symbols": {
+        "A": {
+            "replacement": {
+                "rule": "B[+C][-C]B"
+            },
+            "draw": {
+                "line_length": 20,
+                "angle": 10,
+                "pen_size": 3
+            }
+        },
+        "B": {
+            "replacement": {
+                "rule": "BF"
+            },
+            "draw": {
+                "line_length": 25,
+                "angle": 15,
+                "pen_size": 4
+            }
+        },
+        "C": {
+            "replacement": {
+                "rule": "HH[---D][++++E]C"
+            },
+            "draw": {
+                "line_length": 5,
+                "angle": 0,
+                "pen_size": 2
+            }
+        },
+        "D": {
+            "replacement": {
+                "rule": "H[---G][+++G]-D"
+            },
+            "draw": {
+                "line_length": 5,
+                "angle": 30,
+                "pen_size": 1
+            }
+        },
+        "E": {
+            "replacement": {
+                "rule": "H[---G][+++G]+E"
+            },
+            "draw": {
+                "line_length": 5,
+                "angle": -30,
+                "pen_size": 1
+            }
+        },
+        "F": {
+            "replacement": {
+                "rule": "H[---G]F"
+            },
+            "draw": {
+                "line_length": 10,
+                "angle": 10,
+                "pen_size": 2
+            }
+        },
+        "G": {
+            "replacement": {
+                "rule": "L[+F][-F]G"
+            },
+            "draw": {
+                "line_length": 5,
+                "angle": 5,
+                "pen_size": 1
+            }
+        },
+        "L": {
+            "replacement": {
+                "rule": "HHHHH"
+            },
+            "draw": {
+                "line_length": 3,
+                "angle": 0,
+                "pen_size": 1,
+                "colour": "green"
+            }
+        }
+    },
+    "angle": 10,
+    "line_length": 15,
+    "tropism_angle": 60,
+    "tropism_amount": 0.005,
+    "angle_random_variation": 0.5,
+    "default_pen_size": 3,
+    "length_random_variation": 1,
+    "bud_symbols": "X",
+    "start_pos": [
+        0,
+        -300
+    ],
+    "sub_chance": 1.0
+}

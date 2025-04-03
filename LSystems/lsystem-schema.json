@@ -1,0 +1,125 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "axiom": {
+            "type": "string",
+            "description": "The initial axiom of the L-system."
+        },
+        "symbols": {
+            "type": "object",
+            "description": "Defines the symbols in the L-system, and their rules.",
+            "additionalProperties": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Name of the symbol."
+                    },
+                    "rules": {
+                        "type": "array",
+                        "items": [
+                            {
+                                "rule": {
+                                    "type": "string",
+                                    "description": "String of rule"
+                                },
+                                "probability": {
+                                    "type": "number",
+                                    "description": "Chance of selection"
+                                }
+                            }
+                        ],
+                        "description": "A rule with its associated probability."
+                    },
+                    "draw": {
+                        "type": "object",
+                        "properties": {
+                            "colour": {
+                                "type": "string",
+                                "description": "Colour of the symbol, typically in a string format like 'red' or '#FF0000'."
+                            },
+                            "pen_size": {
+                                "type": "number",
+                                "description": "Pen size used to draw the symbol."
+                            },
+                            "line_length": {
+                                "type": "number",
+                                "description": "The length of the line drawn for this symbol."
+                            },
+                            "line_length_variation": {
+                                "type": "number",
+                                "description": "Variation in the line length."
+                            },
+                            "angle": {
+                                "type": "number",
+                                "description": "The angle at which the symbol is drawn."
+                            },
+                            "angle_variation": {
+                                "type": "number",
+                                "description": "Variation in the angle."
+                            },
+                            "tropism_angle": {
+                                "type": "number",
+                                "description": "Angle of tropism for the symbol."
+                            },
+                            "tropism_strength": {
+                                "type": "number",
+                                "description": "Strength of the tropism effect."
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "line_length": {
+            "type": "number",
+            "description": "The default line length used for drawing symbols."
+        },
+        "line_length_variation": {
+            "type": "number",
+            "description": "The default variation in line length."
+        },
+        "angle": {
+            "type": "number",
+            "description": "The default angle used for drawing symbols."
+        },
+        "angle_variation": {
+            "type": "number",
+            "description": "The default variation in angle."
+        },
+        "tropism_angle": {
+            "type": "number",
+            "description": "The default tropism angle."
+        },
+        "tropism_strength": {
+            "type": "number",
+            "description": "The default tropism strength."
+        },
+        "pen_size": {
+            "type": "number",
+            "description": "The default pen size used for drawing symbols."
+        },
+        "start_pos": {
+            "type": "array",
+            "items": [
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "number"
+                }
+            ],
+            "description": "The starting position of the L-system drawing."
+        },
+        "sub_chance": {
+            "type": "number",
+            "description": "The probability of a symbol being substituted in the system."
+        }
+    },
+    "required": [
+        "axiom",
+        "symbols",
+        "start_pos"
+    ]
+}

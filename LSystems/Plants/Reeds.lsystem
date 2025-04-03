@@ -1,0 +1,83 @@
+{
+    "axiom": "+A",
+    "symbols": {
+        "A": {
+            "name": "roots",
+            "rules": [
+                {
+                    "rule": "BB[-c]A",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "line_length": 5,
+                "line_length_variation": 0.1,
+                "angle": 90,
+                "angle_variation": 0.0,
+                "tropism_angle": 80,
+                "tropism_strength": 0.0001,
+                "pen_size": 2,
+                "colour": "#7f7f33"
+            }
+        },
+        "c": {
+            "name": "stem shoot",
+            "rules": [
+                {
+                    "rule": "CCCD",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "C": {
+            "name": "stem",
+            "rules": [
+                {
+                    "rule": "EC",
+                    "probability": 0.6
+                }
+            ],
+            "draw": {
+                "line_length": 7,
+                "line_length_variation": 1,
+                "angle_variation": 2
+            }
+        },
+        "D": {
+            "name": "bud",
+            "rules": [
+                {
+                    "rule": "TD",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "T": {
+            "name": "flower",
+            "rules": [
+                {
+                    "rule": "T",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "line_length": 1,
+                "line_length_variation": 0,
+                "pen_size": 7,
+                "colour": "#cc8032"
+            }
+        }
+    },
+    "line_length": 2,
+    "line_length_variation": 0.1,
+    "angle": 90,
+    "angle_variation": 0.01,
+    "tropism_angle": 80,
+    "tropism_strength": 0.00001,
+    "pen_size": 2,
+    "start_pos": [
+        -350,
+        -350
+    ],
+    "sub_chance": 1.0
+}

@@ -1,0 +1,88 @@
+{
+    "axiom": "s",
+    "symbols": {
+        "s": {
+            "name": "seed",
+            "rules": [
+                {
+                    "rule": "TT[-Ts][+Ts]",
+                    "probability": 0.6
+                },
+                {
+                    "rule": "TT[-Ts]s",
+                    "probability": 0.4
+                },
+                {
+                    "rule": "TT[+Ts]s",
+                    "probability": 0.6
+                },
+                {
+                    "rule": "b",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "T": {
+            "name": "T",
+            "rules": [
+                {
+                    "rule": "T",
+                    "probability": 0.8
+                },
+                {
+                    "rule": "TT",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "line_length": 20,
+                "colour": "gray",
+                "pen_size": 10
+            }
+        },
+        "b": {
+            "name": "branch",
+            "rules": [
+                {
+                    "rule": "bbb",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "line_length": 25,
+                "line_length_variation": 10,
+                "pen_size": 5,
+                "angle_variation": 3,
+                "tropism_angle": 270,
+                "tropism_strength": 0.1
+            }
+        },
+        "l": {
+            "name": "leaf",
+            "rules": [
+                {
+                    "rule": "l",
+                    "probability": 1.0
+                }
+            ],
+            "draw": {
+                "line_length": 25,
+                "angle": 30,
+                "angle_variation": 5,
+                "pen_size": 10
+            }
+        }
+    },
+    "line_length": 10,
+    "line_length_variation": 0.1,
+    "angle": 10,
+    "angle_variation": 0.01,
+    "tropism_angle": 80,
+    "tropism_strength": 0.01,
+    "pen_size": 2,
+    "start_pos": [
+        0,
+        -300
+    ],
+    "sub_chance": 1.0
+}

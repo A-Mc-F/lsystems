@@ -1,0 +1,35 @@
+{
+    "axiom": "X",
+    "symbols": {
+        "X": {
+            "name": "X",
+            "rules": [
+                {
+                    "rule": "Y+[[X]-X]-Y[-YX]+X",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "Y": {
+            "name": "Y",
+            "rules": [
+                {
+                    "rule": "YY",
+                    "probability": 1.0
+                }
+            ]
+        }
+    },
+    "line_length": 10,
+    "line_length_variation": 0.1,
+    "angle": 20,
+    "angle_variation": 0.01,
+    "tropism_angle": 80,
+    "tropism_strength": 0.01,
+    "pen_size": 2,
+    "start_pos": [
+        0,
+        0
+    ],
+    "sub_chance": 1.0
+}

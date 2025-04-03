@@ -1,0 +1,62 @@
+{
+    "axiom": "A",
+    "symbols": {
+        "A": {
+            "name": "A",
+            "rules": [
+                {
+                    "rule": "BBC",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "B": {
+            "name": "B",
+            "rules": [
+                {
+                    "rule": "BF",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "C": {
+            "name": "C",
+            "rules": [
+                {
+                    "rule": "HHHH[-------D][+++++E]-C",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "D": {
+            "name": "D",
+            "rules": [
+                {
+                    "rule": "H[----G][++++G]-D",
+                    "probability": 1.0
+                }
+            ]
+        },
+        "E": {
+            "name": "E",
+            "rules": [
+                {
+                    "rule": "H[----G][++++G]+E",
+                    "probability": 1.0
+                }
+            ]
+        }
+    },
+    "line_length": 2,
+    "line_length_variation": 1,
+    "angle": 5,
+    "angle_variation": 0.01,
+    "tropism_angle": 60,
+    "tropism_strength": 0.005,
+    "pen_size": 3,
+    "start_pos": [
+        0,
+        -380
+    ],
+    "sub_chance": 1.0
+}
