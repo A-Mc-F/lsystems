@@ -1,265 +1,155 @@
-import turtle
 import random
-import json
 
-lsystem = json.load(open("LSystems/Examples/4_both.lsystem"))
+potential_characters = "abcdefghijklmnopqrstuvwxyz"
+potential_characters = "abcdefghijk"
+angle_characters = "+-"
+branch_characters = "[]"
 
-default_params = {
-    "axiom": "F",
-    "symbols": {
-        "F": {"replacement": {"rule": "XY[++G][--G][G]"}},
-        "G": {"replacement": {"rule": "XX[++G][--G][G]"}},
-    },
-    "line_length": 2,
-    "line_length_variation": 0,
-    "angle": 20,
-    "angle_variation": 0.0,
-    "tropism_angle": 90,
-    "tropism_strength": 0.0,
-    "colour": [0.3, 0.5, 0.2],
-    "pen_size": 2,
-    "start_pos": [0, -380],
-    "sub_chance": 1.0,
-}
+class LSystem:
+    def __init__(self, start_pos:tuple = (0,0)):
+        self.start_pos = start_pos
+        self.axiom = ""
+        self.symbols: dict[str,Symbol] = {}
+        da = Symbol()
+        da.randomise_attributes()
+        self.default_attrbutes:Symbol = da
 
+    def replace(self, char:str):
+        if char in angle_characters or char in branch_characters:
+            return char
+        
+        try:
+            replacements = [*self.symbols[char].rules.keys()]
+            probs = [*self.symbols[char].rules.values()]
 
-def gen_rule():
-    potential_characters = "abcdefghijklmnopqrstuvwxyz"
-    angle_characters = "+-"
-    branch_characters = "[]"
-    branch_openings = 0
+            return random.choices(replacements, probs, k=1)[0]
+        except:
+            return char
 
-    rule = ""
+    def run_rules(self, iterations):
+        for _ in range(iterations):
+            self.axiom = "".join(self.replace(char) for char in self.axiom)
 
-    character = ""
-    check = random.random()
-    while check < 0.9:
-        check = random.random()
-        which = random.random()
-        if which < 0.3:
-            character = potential_characters[int(random.random() * 26)]
-            if random.random() > 0.5:
-                character = character.upper()
-        elif which < 0.6:
-            character = angle_characters[int(random.random() * 2)]
-        else:
-            character = branch_characters[int(random.random() * 2)]
-            if character == "[":
-                branch_openings += 1
+def gen_rule(used_chars:list):
+        branch_openings = 0
+
+        num_of_chars = int(random.triangular(1, 9, 4))
+
+        branch_chance = random.uniform(0.0,0.4)
+        angle_chance = branch_chance + random.uniform(0.0,0.4)
+
+        rule = ""
+
+        last_char_type = ""
+        for i in range(num_of_chars):
+            character = ""
+            which = random.random()
+
+            if which < branch_chance and (num_of_chars - i) > 2:
+                if last_char_type in ["open",""]:
+                    character = "["
+                    last_char_type = "open"
+                    branch_openings += 1
+                else:
+                    leaning = 0.3 # open
+                    if branch_openings > 0:
+                        leaning = 0.7 # close
+                    character = branch_characters[round(random.triangular(0,1,leaning))]
+                    if character == "[":
+                        last_char_type = "open"
+                        branch_openings += 1
+                    elif character == "]":
+                        if branch_openings <= 0:
+                            rule = "[" + rule
+                            character = ""
+                            branch_openings += 1
+                        elif last_char_type in ["angle+","angle-"]:
+                            character = ""
+                        else:
+                            branch_openings -= 1
+                            last_char_type = "close"
+
+            elif which < angle_chance and (num_of_chars - i) > 1:
+                if last_char_type == "angle-":
+                    character = "-"
+                elif last_char_type == "angle+":
+                    character = "+"
+                else:
+                    character = random.choice(angle_characters)
+                    if character == "+":
+                        last_char_type = "angle+"
+                    elif character == "-":
+                        last_char_type = "angle-"
+
             else:
-                branch_openings -= 1
+                if random.random() < 0.9 and len(used_chars) > 0:
+                    character = used_chars[int(random.random() * len(used_chars))]
+                else:
+                    character = potential_characters[int(random.random() * len(potential_characters))]
+                    if random.random() > 0.5:
+                        character = character.upper()
+                    used_chars.append(character)
+                last_char_type = "char"
+                
 
-        rule += character
+            rule += character
 
-    closeing = ""
-    if branch_openings > 0:
-        closeing = "]" * branch_openings
-        rule += closeing
-    elif branch_openings < 0:
-        closeing = "[" * -branch_openings
-        rule = closeing + rule
-
-    return rule
-
-
-def load_attribute(attibute_name):
-    global lsystem
-    global default_params
-    try:
-        return lsystem[attibute_name]
-    except:
-        return default_params[attibute_name]
-
-
-axiom = load_attribute("axiom")
-string = axiom
-symbols = load_attribute("symbols")
-
-default_angle = load_attribute("angle")
-default_angle_variation = load_attribute("angle_variation")
-default_tropism_angle = load_attribute("tropism_angle")
-default_tropism_strength = load_attribute("tropism_strength")
-default_line_length = load_attribute("line_length")
-default_line_length_variation = load_attribute("line_length_variation")
-default_colour = load_attribute("colour")
-default_pen_size = load_attribute("pen_size")
-default_start_pos = load_attribute("start_pos")
-default_sub_chance = load_attribute("sub_chance")
-
-
-def replace(char):
-    global symbols
-
-    try:
-        total_prob = sum(rule["probability"] for rule in symbols[char]["rules"])
-        rand_choice = random.uniform(0, total_prob)
-        cumulative_prob = 0
-        for rule in symbols[char]["rules"]:
-            cumulative_prob += rule["probability"]
-            if rand_choice <= cumulative_prob:
-                return rule["rule"]
-    except:
-        return char
-
-
-def run_rules(axiom, iterations):
-
-    for _ in range(iterations):
-        symbols = "".join(replace(char) for char in axiom)
-
-    return symbols
-
-
-def draw_string(lindenmayer: turtle.Turtle, string):
-    global symbols
-    stack = []
-    rotations = 0
-    for char in string:
-        if char == "[":
-            stack.append((lindenmayer.heading(), lindenmayer.pos()))
-        elif char == "]":
-            (h, p) = stack.pop()
-            should_hide = lindenmayer.isvisible()
-            lindenmayer.hideturtle()
-            lindenmayer.penup()
-            lindenmayer.setheading(h)
-            lindenmayer.setpos(p)
-            lindenmayer.pendown()
-            if should_hide:
-                lindenmayer.showturtle()
-        elif char == "+":
-            rotations += 1
-        elif char == "-":
-            rotations -= 1
-        else:
-            try:
-                colour = symbols[char]["draw"]["colour"]
-            except:
-                colour = default_colour
-            lindenmayer.color(colour)
-
-            try:
-                pen_size = symbols[char]["draw"]["pen_size"]
-            except:
-                pen_size = default_pen_size
-            lindenmayer.pensize(pen_size)
-
-            if rotations != 0:
-                try:
-                    base_angle_increment = symbols[char]["draw"]["angle"]
-                except:
-                    base_angle_increment = default_angle
-
-                new_angle_increment = rotations * base_angle_increment
+        if branch_openings > 0:
+            closeing = "]" * branch_openings
+            if last_char_type == "open":
+                if random.random() < 0.9 and len(used_chars) > 0:
+                    character = used_chars[int(random.random() * len(used_chars))]
+                else:
+                    character = potential_characters[int(random.random() * len(potential_characters))]
+                    if random.random() > 0.5:
+                        character = character.upper()
+                    used_chars.append(character)
+                rule += character + closeing
             else:
-                new_angle_increment = 0
+                rule += closeing
+        elif branch_openings < 0:
+            closeing = "[" * -branch_openings
+            rule = closeing + rule
 
-            try:
-                angle_variation = symbols[char]["draw"]["angle_variation"]
-            except:
-                angle_variation = default_angle_variation
+        return rule, random.randint(1, 10)
+    
+class Symbol:
+    def __init__(self):
+        self.angle = 20.0
+        self.angle_variation = 2.0
+        self.tropism_angle = 10.0
+        self.tropism_strength = 0.05
+        self.line_length = 5.0
+        self.line_length_variation = 1.0
+        self.colour = [74,124,89]
+        self.thickness = 2.0
+        self.rules:dict = {}
 
-            if angle_variation > 0:
-                lindenmayer.right(random.gauss(new_angle_increment, angle_variation))
-            else:
-                lindenmayer.right(new_angle_increment)
-            rotations = 0
-
-            # tropism
-            try:
-                tropism_strength = symbols[char]["draw"]["tropism_strength"]
-            except:
-                tropism_strength = default_tropism_strength
-
-            if tropism_strength > 0:
-
-                try:
-                    tropism_angle = symbols[char]["draw"]["tropism_angle"]
-                except:
-                    tropism_angle = default_tropism_angle
-
-                hd = lindenmayer.heading()
-
-                tropism_delta = hd - tropism_angle
-                if tropism_delta > 180:
-                    tropism_delta -= 360
-                elif tropism_delta < -180:
-                    tropism_delta += 360
-
-                lindenmayer.right(tropism_delta * tropism_strength)
-
-            try:
-                line_length = symbols[char]["draw"]["line_length"]
-            except:
-                line_length = default_line_length
-
-            try:
-                line_length_variation = symbols[char]["draw"]["line_length_variation"]
-            except:
-                line_length_variation = default_line_length_variation
-
-            if line_length_variation > 0:
-                lindenmayer.forward(random.gauss(line_length, line_length_variation))
-            else:
-                lindenmayer.forward(line_length)
+    def randomise_attributes(self):
+        self.angle = random.gauss(0.0, 50.0)
+        self.angle_variation = random.uniform(0.0, 10.0)
+        self.tropism_angle = random.uniform(0.0, 360.0)
+        self.tropism_strength = random.gauss(0.0, 0.03)
+        self.line_length = random.uniform(1.0, 10.0)
+        self.line_length_variation = random.uniform(0.0, self.line_length / 2)
+        self.colour = [random.triangular(0, 1, 0.2),
+                       random.triangular(0, 1, 0.8),
+                       random.triangular(0, 1, 0.3)]
+        self.thickness = random.uniform(2, self.line_length *0.8)
 
 
-win = turtle.Screen()
-win.title("L-Systems")
-win.setup(800, 800)
-win.bgcolor(0.9, 0.83, 0.7)
+    def to_string(self):
+        return str(self.__dict__)
+    
 
-lindenmayer = turtle.Turtle()
-lindenmayer.color(default_colour)
-lindenmayer.pensize(default_pen_size)
-
-
-def fast_mode():
-    global win, lindenmayer
-    print("Fast mode")
-    win.tracer(0, 0)
-    lindenmayer.hideturtle()
-    lindenmayer.speed("fastest")
-
-
-def slow_mode():
-    global win, lindenmayer
-    print("Slow mode")
-    win.tracer(1, 25)
-    lindenmayer.showturtle()
-    lindenmayer.turtlesize(2)
-    lindenmayer.speed("slow")
-
-
-def iterate():
-    global string
-
-    lindenmayer.clear()
-    lindenmayer.penup()
-    lindenmayer.goto(default_start_pos)
-    lindenmayer.setheading(90)
-    lindenmayer.pendown()
-
-    draw_string(lindenmayer, string)
-    win.update()
-
-    string = run_rules(string, 1)
-
-
-fast_mode()
-
-iterate()
-
-print("ENTER to advance")
-print("UP for fast mode")
-print("DOWN for slow mode")
-
-print(gen_rule())
-
-win.onkey(iterate, "Return")
-win.onkey(fast_mode, "Up")
-win.onkey(slow_mode, "Down")
-win.onkey(win.exitonclick, "Escape")
-
-win.listen()
-win.mainloop()
+if __name__ == "__main__":
+    lsystem = LSystem()
+    lsystem.axiom = "F"
+    characters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"]
+    lsystem.symbols = {char: Symbol() for char in characters}
+    for symbol in lsystem.symbols.items():
+        char = symbol[0]
+        symb = symbol[1]
+        symb.randomise_attributes()
+        symb.rules = {gen_rule(characters)}
+        print(f"{char} {symb.to_string()}")
