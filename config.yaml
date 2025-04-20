@@ -1,0 +1,25 @@
+window:
+  width: 800
+  height: 600
+  title: "My Application"
+  resizable: true
+  fullscreen: false
+  background_color: "#FFFFFF"
+  icon: "icon.png"
+
+symbol_template:
+  angle_range: [0, 180]
+  angle_SD_range: [0, 180]
+
+  tropism_angle_range: [0, 360]
+  tropism_angle_SD_range: [0, 360]
+
+  length_range: [0, 100]
+  length_SD_range: [0, 100]
+
+  color_range: [0, 1]
+
+character_lib:
+  potential_characters: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  angle_characters: "+-"
+  branch_characters: "[]"
