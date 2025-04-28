@@ -12,11 +12,13 @@ class LSystem:
         self.axiom:list[Symbol] = []
         
         layers = 3
-        builders = [LineSymbolBuilder() for _ in range(layers)]
-        for builder in builders:
+        builders:list[LineSymbolBuilder] = []
+        for _ in range(layers):
+            builder = LineSymbolBuilder()
             builder.gen_rules(builders)
+            builders.append(builder)
         
-        init_axiom = builders
+        init_axiom = [builders[0].build()]
         for symbol in init_axiom:
             if type(symbol) is LineSymbolBuilder:
                 symbol = symbol.build()
@@ -26,7 +28,7 @@ class LSystem:
 
     def iterate(self):
         """Run the replacement rules"""
-        if len(self.axiom) > 5000:
+        if len(self.axiom) > 1000:
             return 1
         
         new_axiom = []
@@ -248,15 +250,9 @@ class LineSymbolBuilder:
         self.colour_green_tri = _tri_range(min_colour, max_colour,0.1, colour_preference_green)
         self.colour_blue_tri = _tri_range(min_colour, max_colour,0.1, colour_preference_blue)
 
-    def gen_rules(self, other_builders:list):
-        if other_builders:
-            num_builders = random.randint(2, 6)
-            builders_subset = random.sample(other_builders, min(num_builders, len(other_builders)))
-        else:
-            builders_subset = []
-
+    def gen_rules(self, other_builders:list[LineSymbolBuilder]):
         for _ in range(math.floor(random.triangular(1, 5, 1))):
-            rule_and_prob = [gen_rule(builders_subset.copy(), self), random.randint(1, 10)]
+            rule_and_prob = [gen_rule(other_builders.copy(), self), random.randint(1, 10)]
             self.rules.append(rule_and_prob)
 
     def build(self):
@@ -307,13 +303,15 @@ def gen_rule(outsourced_builders:list=[], line_symbol:LineSymbol=None) -> list[S
 
         if which < branch_chance and (num_of_symbols - i) > 2 and last_symbol != None:
             # Branching
+            branch_chance -= 0.1
+            angle_chance += 0.1
             if type(last_symbol) in [BranchSymbol, DirectionSymbol]:
                 last_symbol = BranchSymbol(BranchState.OPEN)
                 rule.append(last_symbol)
                 branch_openings += 1
 
             elif type(last_symbol) is LineSymbol:
-                leaning = 0.6 if branch_openings > 0 else 0.4
+                leaning = 0.7 if branch_openings > 0 else 0.3
                 state = [BranchState.OPEN,BranchState.CLOSE][round(random.triangular(0,1,leaning))]
                 if state == BranchState.OPEN:
                     last_symbol = BranchSymbol(state)
@@ -325,6 +323,8 @@ def gen_rule(outsourced_builders:list=[], line_symbol:LineSymbol=None) -> list[S
                     branch_openings -= 1
 
         elif which < angle_chance and (num_of_symbols - i) > 2:
+            angle_chance -= 0.1
+            branch_chance -= 0.1
             # Direction
             if type(last_symbol) is DirectionSymbol:
                 if last_symbol.direction == Direction.LEFT:
@@ -346,6 +346,7 @@ def gen_rule(outsourced_builders:list=[], line_symbol:LineSymbol=None) -> list[S
 
         else:
             # Line
+            branch_chance += 0.1
             charaters += 1
             chance = random.random()
             if chance < 0.2 and line_symbol is not None:
@@ -368,7 +369,7 @@ def gen_rule(outsourced_builders:list=[], line_symbol:LineSymbol=None) -> list[S
                 if len(outsourced_builders) > 0:
                     last_symbol = random.choice(outsourced_builders)
                 else:
-                    last_symbol = LineSymbolBuilder(outsourced_builders)
+                    last_symbol = LineSymbolBuilder()
                 rule.append(last_symbol)
         close_off = [BranchSymbol(BranchState.CLOSE)] * branch_openings
         rule.extend(close_off)
@@ -403,6 +404,9 @@ if __name__ == "__main__":
     for lsystem in lsystems:
         lsystem.axiom = base_lsystem.axiom.copy()
 
+    timer = 0
+    time_up = False
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -418,12 +422,19 @@ if __name__ == "__main__":
             if lsystem.iterate() != 1:
                 still_growing = True
 
-        if not still_growing:
+        if not still_growing or time_up:
             base_lsystem = LSystem(start_positions[0])
             lsystems = [LSystem(start_pos) for start_pos in start_positions]
             for lsystem in lsystems:
                 lsystem.axiom = base_lsystem.axiom.copy()
             done = 0
+
+        timer+=1
+        if timer > 1000:
+            timer = 0
+            time_up = True
+        else:
+            time_up = False
 
         # Update the display
         pygame.display.flip()
